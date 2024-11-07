@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shreyians EJS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="main w-full min-h-screen bg-zinc-900 text-white">
+      <div class="form p-10">
+        <form
+          action="/create"
+          method="post"
+          class="max-w-3xl mx-auto grid gap-4"
+        >
+          <input
+            type="text"
+            name="title"
+            placeholder="Task Title"
+            class="bg-zinc-700 px-4 py-2 rounded"
+          />
+          <textarea
+            name="details"
+            placeholder="Task Details"
+            rows="4"
+            class="resize-none bg-zinc-700 px-4 py-2 rounded"
+          ></textarea>
+          <input
+            type="submit"
+            value="Create Task"
+            class="px-4 py-2 w-fit mx-auto rounded bg-zinc-100 text-zinc-900 hover:bg-zinc-200"
+          />
+        </form>
+      </div>
+      <div class="tasks p-10" aria-labelledby="tasks-list">
+        <h2 id="tasks-list" class="text-2xl">Tasks List</h2>
+        <div class="mt-4 flex flex-wrap gap-4">
+          <% if(files.length > 0) { %> <% files.forEach((val) => { %>
+          <div class="task w-80 bg-zinc-800 rounded">
+            <div class="px-4 py-2">
+              <h3 class="text-xl"><%= val %></h3>
+              <a href="/file/<%= val %>" class="inline-block text-blue-500"
+                >Read More</a
+              >
+            </div>
+            <div class="border-t border-zinc-900 grid grid-cols-2 text-sm">
+              <a
+                href="/rename/<%= val %>"
+                class="p-2 text-center hover:bg-zinc-700"
+              >
+                Rename
+              </a>
+              <a
+                href="/edit/<%= val %>"
+                class="p-2 text-center hover:bg-zinc-700"
+              >
+                Edit
+              </a>
+            </div>
+          </div>
+          <% }) %> <% } else { %>
+          <p class="text-zinc-400">No tasks yet</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
